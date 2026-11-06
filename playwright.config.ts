@@ -22,12 +22,16 @@ export default defineConfig({
   webServer: [
     {
       command: "npm run start --prefix backend",
+      stdout: "pipe",
+      stderr: "pipe",
       url: "http://localhost:4000/api/_health",
       reuseExistingServer: !process.env.CI,
       timeout: 30_000,
     },
     {
       command: "npm run dev --prefix frontend",
+      stdout: "pipe",
+      stderr: "pipe",
       url: "http://localhost:5173",
       reuseExistingServer: !process.env.CI,
       timeout: 30_000,
