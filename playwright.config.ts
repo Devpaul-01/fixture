@@ -6,7 +6,10 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: 0,
   workers: 1,
-  reporter: [["list"]],
+  // The JSON report is what the play-agent repair tool reads as failure
+  // evidence (error, stack, attachments). It must land at
+  // test-results/results.json: that is where the tool looks by default.
+  reporter: [["list"], ["json", { outputFile: "test-results/results.json" }]],
   use: {
     baseURL: "http://localhost:5173",
     trace: "retain-on-failure",
